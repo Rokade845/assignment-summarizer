@@ -10,7 +10,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!text.trim()) {
       setError('Please enter some text to summarize.');
       return;
@@ -21,7 +21,8 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/summarize', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${API_URL}/api/summarize`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +62,7 @@ function App() {
               placeholder="Paste your chaotic text here..."
               disabled={loading}
             />
-            
+
             {error && (
               <div className="error-message">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
